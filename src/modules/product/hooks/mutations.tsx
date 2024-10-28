@@ -14,7 +14,7 @@ export function useCreateProduct() {
         },
         onSettled: (_, error) => {
             if (error) {
-                Notification('success', error?.message)
+                Notification('error', error?.message)
             } else {
                 queryClient.invalidateQueries({ queryKey: ["all_products"] })
             }
@@ -31,7 +31,7 @@ export function useUpdateProduct() {
         },
         onSettled: (_, error) => {
             if (error) {
-                Notification('success', error?.message)
+                Notification('error', error?.message)
             } else {
                 queryClient.invalidateQueries({ queryKey: ["all_products"] })
             }
@@ -48,7 +48,7 @@ export function useDeleteProduct() {
         },
         onSettled: (_, error) => {
             if (error) {
-                Notification('success', error?.message)
+                Notification('error', error?.message)
             } else {
                 queryClient.invalidateQueries({ queryKey: ["all_products"] })
             }

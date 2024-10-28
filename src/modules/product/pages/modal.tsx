@@ -43,7 +43,7 @@ const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
         <div>
             <Modal
                 open={open}
-                title={update?.id ? "Edit category" : "Create category"}
+                title={update?.id ? "Edit Product" : "Create Product"}
                 onCancel={handleCancel}
                 footer={false}
             >

@@ -12,7 +12,8 @@
       "@apiUser": ["./src/api/user"],
       "@service": ["./src/service"],
       "@types": ["./src/types"],
-      "@components": ["./src/components"]
+      "@components": ["./src/components"],
+      "@notifications": ["./src/utils"],
     },
 
     /* Bundler mode */
