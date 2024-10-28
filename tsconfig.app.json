@@ -9,6 +9,7 @@
       "@": ["./src"],
       "@modules": ["./src/modules"],
       "@api": ["./src/api"],
+      "@apiUser": ["./src/api/user"],
       "@service": ["./src/service"],
       "@types": ["./src/types"],
       "@components": ["./src/components"]

@@ -1,5 +1,5 @@
 import { SecondParamsType } from "@types";
-import axiosUser from "../../../api/user";
+import axiosUser from "@apiUser";
 
 
 // ========== GET ==========
