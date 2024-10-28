@@ -6,7 +6,7 @@ import { getProduct } from "../service";
 // ========== GET PRODUCT ==========
 export function useGetProducts(params: ParamsType){
     return useQuery({
-        queryKey: ["products", params],
+        queryKey: ["all_products", params],
         queryFn: ()=> getProduct(params)
     })
 }

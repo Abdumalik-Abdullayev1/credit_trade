@@ -1,33 +1,34 @@
-import React from "react";
 import { Input } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 
-interface props {
-   placeholder: string;
-   searchParamKey: string;
-   onSearch: (value: string) => void;
+interface SearchProps {
+  params: {
+    search: string;
+    page: number;
+    limit: number;
+  };
+  setParams: (updater: (prevParams: any) => any) => void; 
 }
 
-const Index = ({ placeholder, searchParamKey, onSearch }: props) => {
-   const navigate = useNavigate();
-   const { search } = useLocation();
+const Index = (props: SearchProps) => {
+  const { params, setParams } = props;
+  const navigate = useNavigate();
+  const location = useLocation(); 
 
-   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      onSearch(value);
-      const search_params = new URLSearchParams(search);
-      search_params.set(searchParamKey, value);
-      navigate(`?${search_params}`);
-   };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newSearchValue = e.target.value;
 
-   return (
-      <Input
-         placeholder={placeholder}
-         onChange={handleSearch}
-         allowClear
-         className="w-[300px]"
-      />
-   );
+    setParams((prev) => ({
+      ...prev,
+      search: newSearchValue,
+    }));
+
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("search", newSearchValue); 
+    navigate(`?${searchParams.toString()}`);
+  };
+
+  return <Input placeholder="Search..." value={params.search} onChange={handleChange} className="search-input max-w-96 mb-4"/>;
 };
 
 export default Index;

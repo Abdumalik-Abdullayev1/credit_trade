@@ -14,6 +14,9 @@ const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
             if(update){
                 form.setFieldsValue({
                     name: update.name,
+                    model: update.model,
+                    color: update.color,
+                    made_in: update.made_in
                 })
             }else{
                 form.resetFields()
@@ -52,8 +55,29 @@ const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
                     layout="vertical"
                 >
                     <Form.Item
-                        label="Category name"
+                        label="Product name"
                         name="name"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Product model"
+                        name="model"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Product color"
+                        name="color"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Made in ..."
+                        name="made_in"
                         rules={[{ required: true, message: "Enter category name" }]}
                     >
                         <Input size="large" />

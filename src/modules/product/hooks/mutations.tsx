@@ -16,7 +16,7 @@ export function useCreateProduct() {
             if (error) {
                 Notification('success', error?.message)
             } else {
-                queryClient.invalidateQueries({ queryKey: ["product"] })
+                queryClient.invalidateQueries({ queryKey: ["all_products"] })
             }
         }
     })
@@ -33,7 +33,7 @@ export function useUpdateProduct() {
             if (error) {
                 Notification('success', error?.message)
             } else {
-                queryClient.invalidateQueries({ queryKey: ["brand"] })
+                queryClient.invalidateQueries({ queryKey: ["all_products"] })
             }
         }
     })
@@ -50,7 +50,7 @@ export function useDeleteProduct() {
             if (error) {
                 Notification('success', error?.message)
             } else {
-                queryClient.invalidateQueries({ queryKey: ["product"] })
+                queryClient.invalidateQueries({ queryKey: ["all_products"] })
             }
         }
     });
