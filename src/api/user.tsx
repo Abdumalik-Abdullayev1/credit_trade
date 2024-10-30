@@ -6,7 +6,7 @@ const axiosUser = axios.create({
 axiosUser.interceptors.request.use((config: any): any => {
     const access_token = localStorage.getItem("AccessToken")
     if (access_token) {
-        config.headers["Authorization"] = `Bearer ${access_token}`
+        config.headers["Authorization"] = `${access_token}`
     }
     return config
 })

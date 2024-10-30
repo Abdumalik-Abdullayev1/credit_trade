@@ -11,3 +11,11 @@ export interface ContractType {
     price: number | string,
     status: string
 }
+
+export interface PaginationType {
+    current: number;
+    total: undefined;
+    pageSize: number;
+    pageSizeOptions: number[];
+    showSizeChanger: boolean;
+}

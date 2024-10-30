@@ -1,6 +1,6 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { ProductsType } from "../types";
-import { createProduct, deleteProduct, updateProduct } from "../service";
+import { createProduct, deleteProduct, updateProduct, uploadImage } from "../service";
 import { Notification } from "../../../utils";
 
 
@@ -55,3 +55,18 @@ export function useDeleteProduct() {
         }
     });
 }
+
+// ========== UPLOAD IMAGE ==========
+export function useUploadImage() {
+    const queryClient = useQueryClient();
+    return useMutation({
+       mutationFn: (data: any) => uploadImage(data),
+       onSettled: async (_, error) => {
+          if (error) {
+             Notification( "error", error?.message,);
+          } else {
+             await queryClient.invalidateQueries({ queryKey: ["made_url"] });
+          }
+       },
+    });
+ }

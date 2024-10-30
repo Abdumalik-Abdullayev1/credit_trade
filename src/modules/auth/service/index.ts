@@ -1,4 +1,4 @@
-import axiosInstance from "@api";
+import { axiosInstance } from "@api";
 import { SignInType, SignUpType } from "../types";
 
 // ========== SignIn ==========

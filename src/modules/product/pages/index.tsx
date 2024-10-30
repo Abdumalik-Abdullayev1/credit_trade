@@ -3,7 +3,7 @@ import { ConfirmDelete, GlobalTable, Search } from "@components"
 import { useSearchParams } from 'react-router-dom'
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useGetProducts } from '../hooks/queries'
-import { Button, Space, Tooltip } from 'antd'
+import { Button, Space, Tooltip, Image } from 'antd'
 import { ProductsType } from '../types'
 import { useDeleteProduct } from '../hooks/mutations';
 import PageModal from './modal'
@@ -83,6 +83,25 @@ const Index = () => {
       title: "Made",
       dataIndex: "made_in",
       key: "made_in"
+    },
+    {
+      title: "Date of creation",
+      dataIndex: "date_of_creation",
+      key: "date_of_creation",
+      render: (date: string) => new Date(date).toLocaleDateString("en-GB")
+    },
+    {
+      title: "Image",
+      dataIndex: "image_url",
+      key: "image_url",
+      render: (image_url: string) => (
+        <Image
+          width={50}
+          src={image_url}
+          alt="Product Image"
+          style={{ borderRadius: "5px", objectFit: "cover" }}
+        />
+      )
     },
     {
       title: "Action",

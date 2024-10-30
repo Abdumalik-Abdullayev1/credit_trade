@@ -17,7 +17,11 @@ const modal = ({ open, update, handleCancel }: ModalPropType) => {
         if (open) {
             if (update) {
                 form.setFieldsValue({
+                    duration: Number(update.duration),
                     consumer_name: update.consumer_name,
+                    consumer_address: update.consumer_address,
+                    consumer_phone_number: update.consumer_phone_number,
+                    consumer_passport_serial: update.consumer_passport_serial,
                 })
             } else {
                 form.resetFields()
@@ -25,23 +29,24 @@ const modal = ({ open, update, handleCancel }: ModalPropType) => {
         }
     }, [open, update, form])
     const handleSubmit = (values: ContractType) => {
+        const payload = {
+            ...values,
+            duration: Number(values.duration),
+            ...(update && { id: update.id })
+        }
+
         if (update) {
-            const payload = { ...values, id: update?.id }
             updateMutate(payload, {
-                onSuccess: () => {
-                    handleCancel()
-                }
+                onSuccess: () => handleCancel()
             })
         } else {
-            createMutate(values, {
-                onSuccess: () => {
-                    handleCancel()
-                }
+            createMutate(payload, {
+                onSuccess: () => handleCancel()
             })
         }
     }
     return (
-        <>
+        <div>
             <Modal
                 open={open}
                 title={update?.id ? "Edit Contract" : "Create Contract"}
@@ -56,8 +61,36 @@ const modal = ({ open, update, handleCancel }: ModalPropType) => {
                     layout="vertical"
                 >
                     <Form.Item
-                        label="Product name"
-                        name="name"
+                        label="Consumer name"
+                        name="consumer_name"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Consumer phone"
+                        name="consumer_phone_number"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Consumer address"
+                        name="consumer_address"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Duration"
+                        name="duration"
+                        rules={[{ required: true, message: "Enter category name" }]}
+                    >
+                        <Input size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Consumer passport number"
+                        name="consumer_passport_serial"
                         rules={[{ required: true, message: "Enter category name" }]}
                     >
                         <Input size="large" />
@@ -76,7 +109,7 @@ const modal = ({ open, update, handleCancel }: ModalPropType) => {
                 </Form>
             </Modal>
 
-        </>
+        </div>
     )
 }
 

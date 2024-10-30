@@ -1,6 +1,6 @@
 import { ParamsType } from "@types";
 import { ProductsType } from "../types";
-import axiosUser from "@apiUser";
+import { axiosUser } from "@api";
 
 // ========== GET ==========
 export const getProduct = async (params: ParamsType) => {
@@ -27,3 +27,8 @@ export const deleteProduct = async (id: string | number) => {
     const response = await axiosUser.delete(`/product/delete/${id}`)
     return response?.data
 }
+
+// ========== UPLOAD IMAGE ==========
+export const uploadImage = async (data: any) => {
+    return await axiosUser.post("/minio/media", data);
+ };

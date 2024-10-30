@@ -1,5 +1,5 @@
 import { ContractType } from '../types';
-import axiosUser from "@apiUser";
+import { axiosUser } from '@api';
 import { ParamsType } from "@types";
 
 

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"
 import { Button, Space, Tooltip } from "antd"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { ConfirmDelete, GlobalTable, Search } from "@components"
+import { ConfirmDelete, GlobalTable, Search, Select } from "@components"
 import { useGetContract } from "../hooks/queries"
 import { useSearchParams } from "react-router-dom";
 import { ContractType } from "../types";
 import { useDeleteContract } from "../hooks/mutation";
-import Modal from "./modal";
+import PageModal from "./modal";
 
 const Index = () => {
   const [open, setOpen] = useState(false)
   const [update, setUpdate] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams()
   const [params, setParams] = useState({
-    search: "",
     limit: 5,
-    page: 1
+    page: 1,
+    search: ""
   })
 
   const { all_contracts, count } = useGetContract(params)?.data || {}
@@ -129,11 +129,11 @@ const Index = () => {
 
   return (
     <div>
-      <h1>Contract</h1>
-      <Modal open={open} handleCancel={handleCancel} update={update} />
+      <PageModal open={open} handleCancel={handleCancel} update={update} />
       <div className='flex justify-between'>
         <Search params={params} setParams={setParams} />
-        <Button type='primary' className='btn' onClick={() => setOpen(true)}>Add Product</Button>
+        <Select />
+        <Button type='primary' className='btn' onClick={() => setOpen(true)}>Add Contract</Button>
       </div>
       <GlobalTable
         data={all_contracts}

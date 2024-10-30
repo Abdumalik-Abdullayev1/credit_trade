@@ -1,14 +1,12 @@
 export interface ProductsType{
-    id: string | undefined
-    name: string | undefined,
-    color: string | undefined,
-    model: string | undefined,
-    made_in: string | undefined,
-    date_of_creation: string | undefined,
-    storage_id: string | undefined,
-    created_at: string | undefined,
-    updated_at: string | undefined,
-    deleted_at: string | undefined,
+    id?: string | undefined
+    name: string,
+    color: string,
+    model: string,
+    made_in: string,
+    date_of_creation: string,
+    image_url?: string,
+    storage_id?: string | number
 }
 
 export interface PaginationType {
