@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { SignInType, SignUpType } from "../types"
 import { signIn, signUp } from "../service"
@@ -7,24 +7,16 @@ import { Token } from "../../../utils/tokens"
 
 
 export function useSignIn() {
-    const queryClient = useQueryClient()
     const navigate = useNavigate()
     return useMutation({
         mutationFn: (data: SignInType) => signIn(data),
         onSuccess: (response) => {
             console.log(response);
-            const { AccessToken } = response?.data
-            Token(AccessToken)
+            const access_token = response?.data?.AccessToken
+            Token(access_token)
             navigate("/user-layout")
             Notification("success", response?.data?.Message)
         },
-        onSettled: async (_,error)=>{
-            if(error){
-                Notification("error", error?.message)
-            }else {
-                await queryClient.invalidateQueries({queryKey: ["auth"]})
-            }
-        }
     })
 }
 

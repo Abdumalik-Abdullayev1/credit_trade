@@ -7,6 +7,11 @@ export async function signIn (data: SignInType){
 }
 
 // ========== SignIn ==========
-export async function signUp (data: SignUpType){
-    return await axiosInstance.post('/user/register', data)
-}
+export async function signUp(data: SignUpType) {
+    return await axiosInstance.post("/user/register", data);
+ }
+ 
+//  ========== VERIFY EMAIL ===========
+ export async function verifyEmail(data: SignUpType) {
+    return await axiosInstance.post("/user/verify_email", data);
+ }

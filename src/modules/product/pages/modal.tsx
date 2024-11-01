@@ -18,7 +18,7 @@ const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
                 made_in: update.made_in,
                 model: update.model,
                 color: update.color,
-                date_of_creation: moment(update.date_of_creation, "DD/MM/YYYY"),
+                date_of_creation: moment(update.date_of_creation).format("YYYY-MM-DD"),
             });
             setImg(update.image_url);
         } else {
@@ -47,7 +47,7 @@ const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
             model: values.model,
             color: values.color,
             made_in: values.made_in,
-            date_of_creation: values.date_of_creation,
+            date_of_creation: moment(values.date_of_creation).format("YYYY-MM-DD"),
             image_url: img,
         };
 
