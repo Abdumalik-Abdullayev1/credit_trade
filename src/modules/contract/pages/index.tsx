@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, Space, Tooltip } from "antd"
+import { Button, Image, Space, Tooltip } from "antd"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { ConfirmDelete, GlobalTable, Search, Select } from "@components"
 import { useGetContract } from "../hooks/queries"
@@ -19,7 +19,7 @@ const Index = () => {
   })
 
   const { all_contracts, count } = useGetContract(params)?.data || {}
-  const {mutate: deleteContract} = useDeleteContract()
+  const { mutate: deleteContract } = useDeleteContract()
 
   useEffect(() => {
     const pageFormParams = searchParams.get("page") || "1";
@@ -69,24 +69,14 @@ const Index = () => {
       key: "consumer_name"
     },
     {
-      title: "Passport seria",
-      dataIndex: "consumer_passport_serial",
-      key: "consumer_passport_serial"
-    },
-    {
-      title: "Address",
-      dataIndex: "consumer_address",
-      key: "consumer_address"
-    },
-    {
       title: "Phone number",
       dataIndex: "consumer_phone_number",
       key: "consumer_phone_number"
     },
     {
-      title: "Price",
-      dataIndex: "price",
-      key: "price"
+      title: "Address",
+      dataIndex: "consumer_address",
+      key: "consumer_address"
     },
     {
       title: "Duration",
@@ -97,6 +87,24 @@ const Index = () => {
       title: "Status",
       dataIndex: "status",
       key: "status"
+    },
+    {
+      title: "Passport seria",
+      dataIndex: "consumer_passport_serial",
+      key: "consumer_passport_serial"
+    },
+    {
+      title: "Passport Image",
+      dataIndex: "passport_image",
+      key: "passport_image",
+      render: (passport_image: string) => (
+        <Image
+          width={50}
+          src={passport_image}
+          alt="Passport Image"
+          style={{ borderRadius: "5px", objectFit: "cover" }}
+        />
+      )
     },
     {
       title: "Action",

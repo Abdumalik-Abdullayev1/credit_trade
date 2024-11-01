@@ -1,6 +1,5 @@
 import { SecondParamsType } from "@types";
-import axiosUser from "@apiUser";
-
+import { axiosUser } from "@api";
 
 // ========== GET ==========
 export const getExchange = async(params: SecondParamsType) => {

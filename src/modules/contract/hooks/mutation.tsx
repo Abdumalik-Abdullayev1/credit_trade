@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ContractType } from "../types";
-import { createContract, deleteContract, updateContract } from "../service";
+import { createContract, deleteContract, updateContract, uploadContractImg } from "../service";
 import { Notification } from "@notifications";
 
 
@@ -58,3 +58,18 @@ export function useDeleteContract() {
         }
     });
 }
+
+// ========== UPLOAD IMAGE ==========
+export function useContractImage() {
+    const queryClient = useQueryClient();
+    return useMutation({
+       mutationFn: (data: any) => uploadContractImg(data),
+       onSettled: async (_, error) => {
+          if (error) {
+             Notification( "error", error?.message,);
+          } else {
+             await queryClient.invalidateQueries({ queryKey: ["made_url"] });
+          }
+       },
+    });
+ }

@@ -3,8 +3,7 @@ import { Button, Form, Input, Modal, DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import { ModalPropType } from "@types";
 import { useCreateProduct, useUpdateProduct, useUploadImage } from "../hooks/mutations";
-// import moment from "moment";
-// import { ProductsType } from "../types";
+import moment from "moment";
 
 const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
     const [form] = useForm()
@@ -19,7 +18,7 @@ const PageModal = ({ open, handleCancel, update }: ModalPropType) => {
                 made_in: update.made_in,
                 model: update.model,
                 color: update.color,
-                date_of_creation: update.date_of_creation.split("T")[0]
+                date_of_creation: moment(update.date_of_creation, "DD/MM/YYYY"),
             });
             setImg(update.image_url);
         } else {

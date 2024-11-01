@@ -28,3 +28,8 @@ export const deleteContract = async(id: string | number) => {
     const response = await axiosUser.delete(`/contract/delete/${id}`)
     return response?.data
 }
+
+// ========== UPLOAD IMAGE ==========
+export const uploadContractImg = async(data: any)=> {
+    return await axiosUser.post("/minio/media", data)
+}
