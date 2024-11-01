@@ -1,46 +1,35 @@
 import { Button, Form, Input } from 'antd';
-import { NavLink, useNavigate } from 'react-router-dom'
-import { FormProps } from 'antd';
-import { useSignUpMutation } from '../hooks/mutations';
+import { NavLink } from 'react-router-dom'
+import { useSignUpMutation, } from '../hooks/mutations';
 import { SignUpType } from '../types';
-// import logo from '../../../../assets/erp_logo.png'
+import logo from '../../../assets/image.jpg'
+import { contextAuth } from '../../../context';
 
 const SignUp = () => {
-  const navigate = useNavigate()
-  const { mutate } = useSignUpMutation()
-  const onFinish: FormProps<SignUpType>["onFinish"] = async (values: any) => {
-    mutate({
-      full_name: values.full_name,
-      phone_number: values.phone_number,
-      email: values.email,
-      address: values.address,
-      username: values.username,
-      password: values.password,
-    },
-      {
-        onSuccess: (response: any) => {
-          if (response.status === 201) {
-            navigate('/')
-          }
-        }
-      })
-  };
-  const onFinishFailed: FormProps<SignUpType>["onFinishFailed"] = () => {
-    console.log('Failed:');
+  const { mutate: signUp } = useSignUpMutation()
+  const { setEmail } = contextAuth()
+  const onFinish = (values: SignUpType) => {
+    signUp(values, {
+      onSuccess: () => {
+        setEmail(values.email);
+      },
+    });
   };
   return (
-    <div className='bg-gradient-to-t from-sky-300 to-indigo-900 flex justify-center'>
-      <div className='w-1/2'>
-        <div className='h-screen flex flex-col justify-center px-48'>
-          <h1 className='flex justify-start mb-8 font-extrabold text-4xl text-white'>Login</h1>
+    <div className='flex'>
+      <div className='hidden lg:block'>
+        <img className='h-screen object-cover' src={logo} alt="logo" />
+      </div>
+      <div className='flex w-screen lg:w-1/2'>
+        <div className='w-screen h-screen flex flex-col justify-center items-center sm:px-14 lg:px-48'>
+          <h1 className='flex justify-start mb-4 font-extrabold text-4xl'>Register</h1>
           <Form
             name="basic"
-            labelCol={{ span: 10, }}
+            labelCol={{ span: 100, }}
             wrapperCol={{ span: 500, }}
             style={{ maxWidth: 1000, }}
             initialValues={{ remember: true, }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             layout='vertical'
           >
