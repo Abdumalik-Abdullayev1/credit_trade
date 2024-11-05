@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, Image, Space, Tooltip } from "antd"
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 import { ConfirmDelete, GlobalTable, Search, Select } from "@components"
 import { useGetContract } from "../hooks/queries"
 import { useSearchParams } from "react-router-dom";
@@ -19,7 +19,7 @@ const Index = () => {
   })
 
   const { all_contracts, count } = useGetContract(params)?.data || {}
-  const { mutate: deleteContract } = useDeleteContract()
+  const { mutate } = useDeleteContract()
 
   useEffect(() => {
     const pageFormParams = searchParams.get("page") || "1";
@@ -48,9 +48,6 @@ const Index = () => {
   const editData = (data: any) => {
     setUpdate(data)
     setOpen(true)
-  }
-  const deleteData = (id: any) => {
-    deleteContract(id)
   }
   const handleCancel = () => {
     setUpdate(null)
@@ -119,17 +116,7 @@ const Index = () => {
               style={{ width: "45px", color: "blue", borderColor: "blue" }}
             />
           </Tooltip>
-          <ConfirmDelete
-            title="Delete product?"
-            description="Are you sure to delete this product?"
-            onConfirm={() => deleteData(record.id)}
-          >
-            <Tooltip title="Delete">
-              <Button style={{ width: "45px", color: "blue", borderColor: "blue" }}>
-                <DeleteOutlined />
-              </Button>
-            </Tooltip>
-          </ConfirmDelete>
+          <ConfirmDelete id={record.id} deleteItem={(id: string | undefined)=>mutate(id)} />
         </Space>
       ),
     }

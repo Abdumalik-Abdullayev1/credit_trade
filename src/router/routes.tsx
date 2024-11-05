@@ -1,7 +1,7 @@
 import { FaCartShopping, FaSackDollar } from "react-icons/fa6";
 import { GrDropbox } from "react-icons/gr";
 import { ImBooks } from "react-icons/im";
-import { FaExchangeAlt, FaHome } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 
 
 const user = [
@@ -14,11 +14,6 @@ const user = [
         content: "Product",
         path: "/user-layout/product",
         icon: <GrDropbox />
-    },
-    {
-        content: "Exchange",
-        path: "/user-layout/exchange",
-        icon: <FaExchangeAlt />
     },
     {
         content: "Contract",

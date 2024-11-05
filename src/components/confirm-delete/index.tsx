@@ -1,24 +1,27 @@
-import { Popconfirm } from "antd";
-const Index = ({
-   title,
-   okText,
-   cancelText,
-   onConfirm,
-   description,
-   children,
-   placement,
-}: any) => {
-   return (
+import { Button, Popconfirm, Tooltip } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+interface ConfirmDelete {
+  id: string | undefined;
+  deleteItem: (id: string | undefined) => void;
+}
+const Index = ({ id, deleteItem }: ConfirmDelete) => {
+  const handleDelete = () => {
+    deleteItem(id);
+  };
+  return (
+    <>
       <Popconfirm
-         title={title}
-         okText={okText}
-         cancelText={cancelText}
-         onConfirm={onConfirm}
-         description={description}
-         placement={placement}
+        title="Delete the task"
+        description="Are you sure to delete this task?"
+        okText="Yes"
+        cancelText="No"
+        onConfirm={handleDelete}
       >
-         {children}
+        <Tooltip title="Delete">
+          <Button danger icon={<DeleteOutlined />}></Button>
+        </Tooltip>
       </Popconfirm>
-   );
+    </>
+  );
 };
 export default Index;

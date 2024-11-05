@@ -1,17 +1,19 @@
 import { Button, Form, Input } from 'antd';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useSignUpMutation, } from '../hooks/mutations';
 import { SignUpType } from '../types';
 import logo from '../../../assets/image.jpg'
 import { contextAuth } from '../../../context';
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const { mutate: signUp } = useSignUpMutation()
   const { setEmail } = contextAuth()
   const onFinish = (values: SignUpType) => {
     signUp(values, {
       onSuccess: () => {
         setEmail(values.email);
+        navigate("/verify-email")
       },
     });
   };

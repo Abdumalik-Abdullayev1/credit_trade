@@ -16,3 +16,10 @@ export interface PaginationType {
     pageSizeOptions: number[];
     showSizeChanger: boolean;
 }
+
+export interface RecordType {
+    id?: string | number,
+    // amount: number | string,
+    // created_at: string,
+    // price: number | string,
+}

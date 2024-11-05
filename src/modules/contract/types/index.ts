@@ -1,5 +1,5 @@
 export interface ContractType {
-    id?: string | number,
+    id?: string | undefined,
     consumer_name?: string,
     consumer_phone_number?: string,
     consumer_address?: string,

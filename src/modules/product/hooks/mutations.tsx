@@ -42,7 +42,7 @@ export function useUpdateProduct() {
 export function useDeleteProduct() {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (id: number) => deleteProduct(id),
+        mutationFn: (id: string | undefined) => deleteProduct(id),
         onSuccess: (response) => {
             Notification('success', response?.message)
         },

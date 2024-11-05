@@ -23,7 +23,7 @@ export const updateProduct = async (data: ProductsType) => {
 }
 
 // ========== DELETE ==========
-export const deleteProduct = async (id: string | number) => {
+export const deleteProduct = async (id: string | undefined ) => {
     const response = await axiosUser.delete(`/product/delete/${id}`)
     return response?.data
 }

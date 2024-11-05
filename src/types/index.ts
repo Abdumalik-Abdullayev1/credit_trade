@@ -1,4 +1,5 @@
 export interface ParamsType {
+    id?: string,
     search?: string | undefined,
     limit?: number | undefined,
     page?: number | undefined,

@@ -40,33 +40,11 @@ const Index = () => {
             { ...values, email },
             {
                 onSuccess: () => {
-                    navigate("/user-layout");
+                    navigate("/");
                 },
             }
         );
     };
-
-    const items = [
-        {
-          key: "signin",
-          label: (
-            <span
-              className="text-lg font-semibold text-[#c2410c]"
-              onClick={() => navigate("/sign-in")}
-            >
-              Log In
-            </span>
-          ),
-        },
-        {
-          key: "signup",
-          label: (
-            <span className="text-lg font-semibold text-[#c2410c]">
-              Sign Up
-            </span>
-          ),
-        },
-      ];
 
     const verificationForm = (
         <>
@@ -74,11 +52,21 @@ const Index = () => {
                 We've sent a verification code to your email. Please check your
                 email ({email}) and enter the code.
             </p>
+
+        </>
+    );
+
+    return (
+        <div className='w-screen h-screen flex flex-col justify-center items-center'>
+            <p className="text-center w-96 px-8">
+                We've sent a verification code to your email. Please check your
+                email ({email}) and enter the code.
+            </p>
             <Form
                 form={form}
                 name="verificationForm"
                 onFinish={handleVerify}
-                className="mt-4"
+                className="mt-4 px-5"
             >
                 <Form.Item
                     name="verifyToken"
@@ -96,21 +84,16 @@ const Index = () => {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        className="w-full mt-4 bg-orange-600 hover:bg-orange-700"
+                        className="w-full mt-4"
                         size="large"
                     >
                         Verify Email
                     </Button>
                 </Form.Item>
             </Form>
-        </>
-    );
-
-    return (
-        <>
             {verify ? (
                 <>
-                    <h2 className="text-2xl font-semibold text-[#c2410c] mb-4">
+                    <h2 className="text-2xl font-semibold mb-4">
                         Verify Email
                     </h2>
                     {verificationForm}
@@ -118,12 +101,12 @@ const Index = () => {
             ) : (
                 <Tabs
                     defaultActiveKey="signup"
-                    items={items}
+                    // items={items}
                     centered
                     tabBarGutter={50}
                 />
             )}
-        </>
+        </div>
     )
 }
 

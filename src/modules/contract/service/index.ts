@@ -24,7 +24,7 @@ export const updateContract = async(data: ContractType) => {
 }
 
 // ========== DELETE ==========
-export const deleteContract = async(id: string | number) => {
+export const deleteContract = async(id: string | undefined) => {
     const response = await axiosUser.delete(`/contract/delete/${id}`)
     return response?.data
 }

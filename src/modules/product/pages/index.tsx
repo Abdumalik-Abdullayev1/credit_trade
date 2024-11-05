@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import { ConfirmDelete, GlobalTable, Search } from "@components"
-import { useSearchParams } from 'react-router-dom'
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { EditOutlined } from "@ant-design/icons";
 import { useGetProducts } from '../hooks/queries'
 import { Button, Space, Tooltip, Image } from 'antd'
-import { ProductsType } from '../types'
+import { ProductsType, RecordType } from '../types'
 import { useDeleteProduct } from '../hooks/mutations';
 import PageModal from './modal'
 
 const Index = () => {
-  const [update, setUpdate] = useState(null)
+  const navigate = useNavigate()
+  const [update, setUpdate] = useState({} as RecordType)
   const [open, setOpen] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams();
   const [params, setParams] = useState({
@@ -19,7 +20,7 @@ const Index = () => {
   })
 
   const { all_products, count } = useGetProducts(params)?.data || {}
-  const { mutate: deleteProduct } = useDeleteProduct()
+  const { mutate } = useDeleteProduct()
 
   useEffect(() => {
     const pageFromParams = searchParams.get("page") || "1";
@@ -49,11 +50,8 @@ const Index = () => {
     setUpdate(data)
     setOpen(true)
   }
-  const deleteData = (id: any) => {
-    deleteProduct(id)
-  }
   const handleCancel = () => {
-    setUpdate(null)
+    setUpdate({} as RecordType)
     setOpen(false)
   }
 
@@ -67,22 +65,38 @@ const Index = () => {
     {
       title: "Name",
       dataIndex: "name",
-      key: "name"
+      key: "name",
+      onCell: (record: RecordType) => ({
+        onClick: () => navigate(`/user-layout/product/${record.id}`),
+        style: { cursor: "pointer" },
+      }),
     },
     {
       title: "Model",
       dataIndex: "model",
-      key: "model"
+      key: "model",
+      onCell: (record: RecordType) => ({
+        onClick: () => navigate(`/user-layout/product/${record.id}`),
+        style: { cursor: "pointer" },
+      }),
     },
     {
       title: "Color",
       dataIndex: "color",
-      key: "color"
+      key: "color",
+      onCell: (record: RecordType) => ({
+        onClick: () => navigate(`/user-layout/product/${record.id}`),
+        style: { cursor: "pointer" },
+      }),
     },
     {
       title: "Made",
       dataIndex: "made_in",
-      key: "made_in"
+      key: "made_in",
+      onCell: (record: RecordType) => ({
+        onClick: () => navigate(`/user-layout/product/${record.id}`),
+        style: { cursor: "pointer" },
+      })
     },
     {
       title: "Date of creation",
@@ -116,17 +130,7 @@ const Index = () => {
               style={{ width: "45px", color: "blue", borderColor: "blue" }}
             />
           </Tooltip>
-          <ConfirmDelete
-            title="Delete product?"
-            description="Are you sure to delete this product?"
-            onConfirm={() => deleteData(record.id)}
-          >
-            <Tooltip title="Delete">
-              <Button style={{ width: "45px", color: "blue", borderColor: "blue" }}>
-                <DeleteOutlined />
-              </Button>
-            </Tooltip>
-          </ConfirmDelete>
+          <ConfirmDelete id={record.id} deleteItem={(id:string | undefined)=>mutate(id)} />
         </Space>
       ),
     }

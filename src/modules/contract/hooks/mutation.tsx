@@ -45,7 +45,7 @@ export function useUpdateContract() {
 export function useDeleteContract() {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (id: number) => deleteContract(id),
+        mutationFn: (id: string | undefined) => deleteContract(id),
         onSuccess: (response) => {
             Notification('success', response?.message)
         },
